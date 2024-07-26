@@ -1,3 +1,7 @@
+"""
+Loads constants from pickle file and creates necessary constants such as blood mappings
+"""
+
 import pickle
 
 BLOOD_TYPES = [

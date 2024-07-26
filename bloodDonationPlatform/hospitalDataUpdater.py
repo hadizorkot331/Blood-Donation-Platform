@@ -1,3 +1,20 @@
+"""
+Uses MOPH website, Google Places API, and Gooogle Place Details API to gather the needed location and contact information
+of all hospitals in Lebanon.
+
+This data is read into a pickle file which is used later by the views
+
+We used this approach instead of making the api calls when necessary due to the following reasons:
+    - All our needed information is limited to ~130 hospitals which repeat throughout all posts
+        since they are the only hospitals in lebanon.
+    - The data accessed is mostly constant and not subject to change. Locations and contact information of hospitals
+        almost never change therefore the information is again repeated
+    - Making api calls would add ~3 seconds of delay on average on the less than ideal Lebanese internet. In a
+        service where urgency is the primary focus, such easily avoidable latency should be avoided
+
+
+"""
+
 from django.conf import settings
 import requests
 import pickle
@@ -20,6 +37,7 @@ fields = ",".join(
         "widget_tweaks",
     ]
 )
+
 API_KEY = settings.GOOGLE_API_KEY
 HOSPITLAS = []
 HOSPITAL_CAZAS = {}

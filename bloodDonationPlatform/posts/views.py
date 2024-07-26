@@ -2,10 +2,7 @@ import sys
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 from .whatsappGroup import getinvitelink
-
-
 from .notifications import notify_compatible_users, send_whatsapp_message
 from .models import Post
 from .forms import PostForm
@@ -20,7 +17,6 @@ from constants import (
 )
 
 
-# Create your views here.
 @login_required(login_url="/users/login/")
 def home(request):
     user_blood_type = request.user.profile.blood_type
@@ -34,7 +30,6 @@ def home(request):
     return render(request, "posts/post-grid.html", {"posts": posts})
 
 
-# @login_required(login_url="/users/login/")
 def all_posts(request):
     posts = Post.objects.filter(fullfilled=False).order_by("-date_added")
     return render(request, "posts/post-grid.html", {"posts": posts})
@@ -44,7 +39,6 @@ def all_posts(request):
 def detailed_post(request, post_id):
     post = Post.objects.get(pk=post_id)
     location_data = HOSPITAL_LOCATION_DATA[post.hospital]
-    print(location_data)
     can_recieve_from = ", ".join(DONORS_OF[post.blood_type])
     return render(
         request,
@@ -60,6 +54,9 @@ def detailed_post(request, post_id):
 @login_required(login_url="/users/login/")
 def my_posts(request):
     if request.method == "POST":
+        # A user's own posts could be marked as fullfilled or marked as unfullfilled on the same page
+        # Therefore we check which action the user wants to take based on the input name
+        # which is stored in the post request
         if "mark_fullfilled_post_id" in request.POST:
             post_id = request.POST.get("mark_fullfilled_post_id")
             post = Post.objects.get(pk=post_id)
@@ -100,7 +97,7 @@ def add_post(request):
             post.caza = HOSPITAL_CAZAS[hospital]
             post.save()
 
-            # TODO enable when you want push notifications
+            # TODO enable when notifications APIs are ready
 
             # notify_compatible_users(
             #     post.blood_type,

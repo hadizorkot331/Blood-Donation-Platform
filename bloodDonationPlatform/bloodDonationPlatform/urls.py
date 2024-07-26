@@ -17,7 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users.views import landing_page
-from posts.views import all_posts
 
 urlpatterns = [
     path("", view=landing_page, name="landing-page"),
