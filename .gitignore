@@ -138,4 +138,4 @@ GitHub.sublime-settings
 .history
 
 # Testing database
-db.sqlite3
+*/db.sqlite3
