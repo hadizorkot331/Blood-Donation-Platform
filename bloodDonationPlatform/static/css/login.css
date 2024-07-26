@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Mono', sans-serif; */
+    font-family: monospace, sans-serif;
+
+}
+
+body {
+    /* background: #031323; */
+    /* background: black; */
+    background-image: url('../images/bg4.jpg');
+    background-size: cover;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow: hidden;
+}
+
+img {
+    width: 32px;
+}
+
+section {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, rgba(114, 17, 17, 0.1), rgba(130, 13, 13, 0.3), rgba(179, 6, 6, 0.1), rgba(131, 15, 15, 0.1));
+    background-size: 400% 400%;
+    animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.box {
+    position: relative;
+}
+
+.circle {
+    position: absolute;
+    background: linear-gradient(90deg, rgba(255, 10, 10, 0.1), rgba(247, 43, 43, 0.397));
+    backdrop-filter: blur(5px);
+    filter: brightness(1.5);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    animation: circle 10s linear infinite;
+    animation-delay: calc(-1s * var(--i));
+    border-radius: 50%;
+    box-shadow: 0 25px 45px rgb(34, 1, 1)
+}
+
+@keyframes circle {
+
+    0%,
+    100% {
+        transform: translateY(-20px);
+    }
+
+    50% {
+        transform: translateY(20px);
+    }
+}
+
+.circle:nth-child(1) {
+    width: 100px;
+    height: 100px;
+    top: -15px;
+    right: -45px;
+}
+
+.circle:nth-child(2) {
+    width: 150px;
+    height: 150px;
+    top: 105px;
+    left: -125px;
+    z-index: 2;
+}
+
+.circle:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    bottom: 85px;
+    right: -45px;
+    z-index: 2;
+}
+
+.circle:nth-child(4) {
+    width: 50px;
+    height: 50px;
+    bottom: 35px;
+    left: -95px;
+}
+
+.circle:nth-child(5) {
+    width: 50px;
+    height: 50px;
+    top: -15px;
+    left: -25px;
+}
+
+.circle:nth-child(6) {
+    width: 85px;
+    height: 85px;
+    top: 165px;
+    right: -155px;
+    z-index: 2;
+}
+
+.container {
+    position: relative;
+    padding: 50px;
+    width: 100%;
+    max-width: 1000px;
+    width: 500px;
+    min-width: 300px;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(135, 9, 9, 0.161);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    box-shadow: 0 25px 45px rgb(34, 1, 1);
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    /* top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px; */
+    border-radius: 10px;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 2%);
+}
+
+.form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.form h2 {
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+
+.inputBx {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.inputBx input {
+    width: 100%;
+    outline: none;
+    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 10px;
+    padding-left: 40px;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.inputBx .password-control {
+    position: absolute;
+    top: 11px;
+    right: 10px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(https://snipp.ru/demo/495/view.svg) 0 0 no-repeat;
+    transition: 0.5s;
+}
+
+.inputBx .view {
+    background: url(https://snipp.ru/demo/495/no-view.svg) 0 0 no-repeat;
+    transition: 0.5s;
+}
+
+.inputBx img {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    transform: scale(0.6);
+    filter: invert(1);
+}
+
+.inputBx input[type="submit"] {
+    background: linear-gradient(90deg, rgba(225, 29, 72), rgba(180, 83, 9));
+    color: #f7f7f7;
+    max-width: 100px;
+    padding: 8px 10px;
+    box-shadow: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 1.5s;
+}
+
+.inputBx input[type="submit"]:hover {
+    /* background: linear-gradient(115deg, rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.25)); */
+    filter: saturate(150%);
+    color: #fff;
+    transition: .5s;
+}
+
+.inputBx input::placeholder {
+    color: #fff;
+}
+
+.inputBx span {
+    position: absolute;
+    left: 30px;
+    padding: 10px;
+    display: inline-block;
+    color: #fff;
+    transition: .5s;
+    pointer-events: none;
+}
+
+.inputBx input:focus~span,
+.inputBx input:valid~span {
+    transform: translateX(-30px) translateY(-25px);
+    font-size: 12px;
+}
+
+.form p {
+    color: #fff;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.form p a {
+    color: #fff;
+}
+
+.form p a:hover {
+    background-color: #000;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.remember {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.errors {
+    color: red;
+    position: relative;
+    margin-bottom: 1rem;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .errors {
+        width: 300px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .inputBx input {
+        padding-left: 30px;
+    }
+
+    .inputBx span {
+        left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .errors {
+        width: 300px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 15px;
+        /* overflow: hidden; */
+    }
+
+    .inputBx input {
+        font-size: 14px;
+    }
+
+    .form h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .form p {
+        font-size: 13px;
+    }
+}

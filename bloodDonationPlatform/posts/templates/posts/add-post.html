@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% load widget_tweaks %}
+{% block title %}Add Post{% endblock title %}
+{% block content %}
+{% if form.errors %}
+    
+{% for field in form %}
+  {% for error in field.errors %}
+  <div role="alert">
+    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2 z-100">
+      Error
+    </div>
+    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700 mt-8">
+      <p>{{error}}</p>
+    </div>
+  </div>
+  {% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+<div role="alert">
+  <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2 z-100 mt-8">
+    Error
+  </div>
+  <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+    <p>{{error}}</p>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+<div class="container w-full h-full p-4 z-10 mx-auto flex justify-center items-center">
+<form action="{% url 'posts:add-post' %}" class="w-full h-full flex justify-center items-center" method="post">
+    {% csrf_token %}
+  <div
+  class="bg-slate-400/[0.05] w-4/5 md:w-3/5 h-4/5 rounded-2xl backdrop-blur-md brightness-125 shadow-lg flex flex-col items-center">
+  
+  <div class=" w-4/5 h-1/5 flex flex-col justify-center font-mono text-3xl text-slate-200 font-bold">
+      ADD POST
+  </div>
+  <div class="w-4/5 h-3/5 flex flex-col justify-evenly  font-mono ">
+      <label class="block text-slate-200 text-sm font-bold font-mono" for="Hospital">
+          Hospital
+      </label>
+      <div class="relative inline-block">
+        <!-- hospital dropdown menu -->
+        {% render_field form.hospital class+="text-white bg-rose-200/[0.15] hover:bg-rose-800 outline-none  font-medium rounded-3xl text-sm px-5 py-2.5 text-center inline-flex items-center w-full" type="button"%}
+      </div>
+      <div class="flex flex-col gap-0 md:flex-row md:gap-3 ">
+        <div class="flex flex-col w-full md:w-1/2">
+      <label class="block text-slate-200 text-sm font-bold font-mono" for="BloodType1">
+          Blood Type
+      </label>
+      <div class="relative inline-block">
+        <!-- bloodtype dropdown menu -->
+        {% render_field form.blood_type class+="text-white bg-rose-200/[0.15] hover:bg-rose-800 outline-none  font-medium rounded-3xl text-sm px-5 py-2.5 text-center inline-flex items-center w-full" type="button"%}
+      </div>
+        </div>
+      <div class="flex flex-col w-full md:w-1/2"> 
+        <label class="block text-slate-200 text-sm font-bold font-mono" for="Phone">
+            Phone Number
+        </label>
+            {% render_field form.phone_number class="shadow rounded-3xl w-full py-1 px-4 text-black placeholder-black font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" type="tel"%}
+      </div>
+        
+        </div>
+        <label class="block text-slate-200 text-sm font-bold font-mono" for="Description">
+            Description
+        </label>
+            {% render_field form.description class+="shadow rounded-3xl w-full py-1 px-4 text-black placeholder-black font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" rows="5"  type="text"%}
+        </div>
+        <button
+        type="submit"
+            class="bg-gradient-to-r w-4/5 from-rose-600 to-amber-700 font-mono font-thin rounded-3xl py-1 px-12
+        text-slate-200 text-lg shadow-lg mt-5 transition duration-300 hover:saturate-[1.25] hover:drop-shadow-lg">
+            Add Post
+        </button>
+</form>
+</div>
+{% endblock content %}

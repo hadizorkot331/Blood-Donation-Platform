@@ -1,0 +1,118 @@
+{%load static%}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Sign Up Page</title>
+</head>
+
+<body>
+    {% if form.errors %}
+    {% for field in form %}
+      {% for error in field.errors %}
+      <div role="alert">
+        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          Error
+        </div>
+        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>{{error}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div role="alert">
+      <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+        Error
+      </div>
+      <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+        <p>{{error}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+
+    <div class="bg-cover bg-no-repeat bg-fixed h-screen w-screen flex justify-center items-center"
+        style="background-image: url({% static '/images/bg4.jpg'%});">
+        <form action="{% url 'users:register' %}" class="w-full h-full flex justify-center items-center" method="post">
+            {% csrf_token %}
+        <div
+            class="bg-slate-400/[0.05] w-4/5 md:w-2/5 h-4/5 rounded-2xl backdrop-blur-md brightness-125 shadow-lg flex flex-col justify-evenly items-center">
+            <div class=" w-4/5 h-1/5 flex flex-col justify-center font-mono text-3xl text-slate-200 font-bold">
+                REGISTER
+            </div>
+            <div class="w-4/5 h-auto flex flex-col justify-evenly font-mono ">
+                <label class="block text-slate-200 text-sm font-bold font-mono" for="username">
+                    Username
+                </label>
+                {% comment %} <input
+                    class="shadow rounded-3xl w-full py-1 px-4 text-gray-950 placeholder-black/[0.8] font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20"
+                    id="username" type="text" placeholder="Username"> {% endcomment %}
+                    {% with WIDGET_REQUIRED_CLASS='required' %}
+                        {% render_field form.username class+="shadow rounded-3xl w-full py-1 px-4 text-gray-950 placeholder-black/[0.8] font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" placeholder="Username" type="text" %}
+                    {% endwith %}
+                    
+                    <div class="flex flex-col gap-0 md:flex-row md:gap-3 ">
+                        <div class="flex flex-col">
+                            <label class="block text-slate-200 text-sm font-bold font-mono" for="FirstName">
+                                First Name
+                            </label>
+                            {% comment %} <input
+                            class="placeholder-black/[0.8] shadow rounded-3xl w-full py-1 px-4 text-gray-950 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20"
+                            id="FirstName" type="text" placeholder="FirstName"> {% endcomment %}
+                            {% with WIDGET_REQUIRED_CLASS='required' %}
+                                {% render_field form.first_name class+="placeholder-black/[0.8] shadow rounded-3xl w-full py-1 px-4 text-gray-950 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" placeholder="First Name" type="text" %}
+                            {% endwith %}
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="block text-slate-200 text-sm font-bold font-mono" for="LastName">
+                                Last Name
+                            </label>
+                            {% comment %} <input
+                            class="placeholder-black/[0.8] shadow rounded-3xl w-full py-1 px-4 text-gray-950 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20"
+                            id="LastName" type="text" placeholder="LastName"> {% endcomment %}
+                            {% with WIDGET_REQUIRED_CLASS='required' %}
+                                {% render_field form.last_name class+="placeholder-black/[0.8] shadow rounded-3xl w-full py-1 px-4 text-gray-950 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" placeholder="Last Name" type="text" %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    
+                    <label class="block text-slate-200 text-sm font-bold font-mono" for="username">
+                        Password
+                    </label>
+                    {% comment %} <input
+                    class="placeholder-black/[0.8] shadow rounded-3xl w-full py-1 px-4 mb-2 text-gray-950 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20"
+                    id="password" type="password" placeholder="Password"> {% endcomment %}
+                    {% with WIDGET_REQUIRED_CLASS='required' %}
+                        {% render_field form.password1 class+="placeholder-black/[0.8] shadow rounded-3xl w-full py-1 px-4 mb-2 text-gray-950 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" placeholder="Password" type="password" %}
+                    {% endwith %}
+                    <label class="block text-slate-200 text-sm font-bold font-mono" for="username">
+                        Confirm Password
+                    </label>
+                    {% comment %} <input
+                    class="placeholder-black/[0.8] shadow rounded-3xl w-full py-1 px-4 mb-2 text-gray-950 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20"
+                    id="password" type="password" placeholder="ConfirmPassword"> {% endcomment %}
+                    {% with WIDGET_REQUIRED_CLASS='required' %}
+                        {% render_field form.password2 class+="placeholder-black/[0.8] shadow rounded-3xl w-full py-1 px-4 mb-2 text-gray-950 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" placeholder="Confirm Password" type="password" %}
+                    {% endwith %}
+                <button
+                    class="bg-gradient-to-r w-full from-rose-600 to-amber-700 font-mono font-thin rounded-3xl py-1 px-12
+                text-slate-200 text-lg shadow-lg mt-5 transition duration-300 hover:saturate-[1.25] hover:drop-shadow-lg">
+                    Next
+                </button>
+            </div>
+            <div
+                class=" w-4/5 h-1/5 flex flex-col justify-center font-mono text-md text-slate-200 font-bold items-center">
+                Already have an account? <a href="{% url 'users:login' %}" class="text-red-600 underline">Sign in</a>
+            </div>
+        </div>
+    </form>
+    </div>
+</body>
+
+</html>
