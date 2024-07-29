@@ -79,10 +79,11 @@ def my_posts(request):
 
 @login_required(login_url="/users/login/")
 def whatsapp_group_link(request):
-    # TODO: make sure that https:// is included in the link
-    # group_link = "https://www.youtube.com"
-    group_link = getinvitelink()
-    return redirect(group_link)
+    if request.method == "GET":
+        # TODO: make sure that https:// is included in the link
+        # group_link = "https://www.youtube.com"
+        group_link = getinvitelink()
+        return redirect(group_link)
 
 
 @login_required(login_url="/users/login/")
