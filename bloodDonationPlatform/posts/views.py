@@ -80,8 +80,8 @@ def my_posts(request):
 @login_required(login_url="/users/login/")
 def whatsapp_group_link(request):
     # TODO: make sure that https:// is included in the link
-    group_link = "https://www.youtube.com"
-    # group_link = getinvitelink()
+    # group_link = "https://www.youtube.com"
+    group_link = getinvitelink()
     return redirect(group_link)
 
 
@@ -99,16 +99,16 @@ def add_post(request):
 
             # TODO enable when notifications APIs are ready
 
-            # notify_compatible_users(
-            #     post.blood_type,
-            #     post.hospital,
-            #     DONORS_OF[post.blood_type],
-            #     post.caza,
-            # )
+            notify_compatible_users(
+                post.blood_type,
+                post.hospital,
+                DONORS_OF[post.blood_type],
+                post.caza,
+            )
 
-            # msg = f"{post.blood_type} needed at {hospital} {post.description}"
-            # print(msg)
-            # send_whatsapp_message(message=msg)
+            msg = f"{post.blood_type} needed at {hospital} {post.description}"
+            print(msg)
+            send_whatsapp_message(message=msg)
 
             messages.success(request, "Post Added Successfully.")
             return redirect("posts:my-posts")
