@@ -1,3 +1,4 @@
+from email import message
 import sys
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
@@ -80,8 +81,6 @@ def my_posts(request):
 @login_required(login_url="/users/login/")
 def whatsapp_group_link(request):
     if request.method == "GET":
-        # TODO: make sure that https:// is included in the link
-        # group_link = "https://www.youtube.com"
         group_link = getinvitelink()
         return redirect(group_link)
 
@@ -99,19 +98,25 @@ def add_post(request):
             post.save()
 
             # TODO enable when notifications APIs are ready
-
-            notify_compatible_users(
+            failed = False
+            if not notify_compatible_users(
                 post.blood_type,
                 post.hospital,
                 DONORS_OF[post.blood_type],
                 post.caza,
-            )
+            ):
+                messages.warning(request, "Could Not Send Email Notifcation")
+                failed = True
 
             msg = f"{post.blood_type} needed at {hospital} {post.description}"
             print(msg)
-            send_whatsapp_message(message=msg)
+            if not send_whatsapp_message(message=msg):
+                messages.warning(request, "Could Not Send Email Notification")
+                failed = True
 
-            messages.success(request, "Post Added Successfully.")
+            if not failed:
+                messages.success(request, "Post Added Successfully.")
+
             return redirect("posts:my-posts")
     else:
         form = PostForm()

@@ -1,3 +1,4 @@
+import smtplib
 from django.core.mail import send_mass_mail
 from users.models import Profile
 from django.conf import settings
@@ -14,7 +15,11 @@ def send_whatsapp_message(grp_id="120363317413351438@g.us", message=""):
         "authorization": f"Bearer {settings.WHATSAPP_API_KEY}",
     }
 
-    response = requests.post(url, json=payload, headers=headers)
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        return True
+    except (requests.HTTPError, ConnectionError, TimeoutError):
+        return False
 
     print(response.text)
 
@@ -36,4 +41,8 @@ def notify_compatible_users(needed_blood_type, hospital, compatible_blood_types,
         )
         for user_email in compatible_user_emails
     ]
-    send_mass_mail(message_list, fail_silently=False)
+    try:
+        send_mass_mail(message_list, fail_silently=False)
+        return True
+    except smtplib.SMTPException:
+        return False
