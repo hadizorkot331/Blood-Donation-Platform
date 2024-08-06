@@ -50,7 +50,10 @@ def complete_profile(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            messages.warning(request, "Join Whatsapp Group For Notifications (Navbar)")
+            messages.success(
+                request,
+                "Account Created! Join Whatsapp Group For Notifications (Navbar)",
+            )
             return redirect("posts:home")
     else:
         form = ProfileCompletionForm()
