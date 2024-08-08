@@ -39,7 +39,7 @@ fields = ",".join(
 )
 
 API_KEY = settings.GOOGLE_API_KEY
-HOSPITLAS = []
+HOSPITALS = []
 HOSPITAL_CAZAS = {}
 HOSPITAL_LOCATION_DATA = {}
 
@@ -60,7 +60,7 @@ for i in range(1, 6):
 
     cazas = hospitals["Caza"].values()
 
-    HOSPITLAS.extend(names)
+    HOSPITALS.extend(names)
 
     HOSPITAL_CAZAS.update(dict(zip(names, cazas)))
 
@@ -68,7 +68,7 @@ CAZAS = set(HOSPITAL_CAZAS.values())
 
 data = {
     "HOSPITAL_CAZAS": HOSPITAL_CAZAS,
-    "HOSPITALS": HOSPITLAS,
+    "HOSPITALS": HOSPITALS,
     "CAZAS": CAZAS,
     "HOSPITAL_LOCATION_DATA": HOSPITAL_LOCATION_DATA,
 }
