@@ -41,6 +41,7 @@ def detailed_post(request, post_id):
     post = Post.objects.get(pk=post_id)
     location_data = HOSPITAL_LOCATION_DATA[post.hospital]
     can_recieve_from = ", ".join(DONORS_OF[post.blood_type])
+    print(location_data["place_id"])
     return render(
         request,
         "posts/detailed-post.html",
@@ -78,7 +79,7 @@ def my_posts(request):
         return render(request, "posts/my-posts.html", {"posts": posts})
 
 
-@login_required(login_url="/users/login/")
+@login_required(login_url="/users/login/")  # type: ignore
 def whatsapp_group_link(request):
     if request.method == "GET":
         group_link = getinvitelink()
