@@ -42,9 +42,12 @@ with open("../bloodDonationPlatform/hospital_data_with_maps.pickle", "rb") as p:
     data = pickle.load(p)
 
 HOSPITALS = data["HOSPITALS"]
-HOSPITALS_AS_CHOICES = [(HOSPITAL, HOSPITAL) for HOSPITAL in HOSPITALS]
 CAZAS = data["CAZAS"]
+
+# Django forms require choices to be in this format
+HOSPITALS_AS_CHOICES = [(HOSPITAL, HOSPITAL) for HOSPITAL in HOSPITALS]
 CAZAS_AS_CHOICES = [(CAZA, CAZA) for CAZA in CAZAS]
+
 HOSPITAL_CAZAS = data["HOSPITAL_CAZAS"]
 HOSPITAL_LOCATION_DATA = data["HOSPITAL_LOCATION_DATA"]
 
