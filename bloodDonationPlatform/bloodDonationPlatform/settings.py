@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+HOST = os.getenv("HOST")
 
 # Application definition
 
