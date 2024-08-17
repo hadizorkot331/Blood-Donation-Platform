@@ -3,6 +3,8 @@ import sys
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse
+from django.conf import settings
 from .whatsappGroup import getinvitelink
 from .notifications import notify_compatible_users, send_whatsapp_message
 from .models import Post
@@ -98,20 +100,27 @@ def add_post(request):
             post.caza = HOSPITAL_CAZAS[hospital]
             post.save()
 
-            # TODO enable when notifications APIs are ready
             failed = False
             if not notify_compatible_users(
                 post.blood_type,
                 post.hospital,
                 DONORS_OF[post.blood_type],
                 post.caza,
+                post.description,
+                post.id,
             ):
                 messages.warning(request, "Could Not Send Email Notifcation")
                 failed = True
 
             msg = f"{post.blood_type} needed at {hospital} {post.description}"
-            print(msg)
-            if not send_whatsapp_message(message=msg):
+            # print(msg)
+            if not send_whatsapp_message(
+                post.blood_type,
+                post.hospital,
+                DONORS_OF[post.blood_type],
+                post.description,
+                post.id,
+            ):
                 messages.warning(request, "Could Not Send Email Notification")
                 failed = True
 
