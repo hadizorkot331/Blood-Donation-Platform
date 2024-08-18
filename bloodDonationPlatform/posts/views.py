@@ -125,7 +125,10 @@ def add_post(request):
                 failed = True
 
             if not failed:
-                messages.success(request, "Post Added Successfully.")
+                messages.success(
+                    request,
+                    "Post Added Successfully. Email and WhatsApp Notifications Sent.",
+                )
 
             return redirect("posts:my-posts")
     else:
