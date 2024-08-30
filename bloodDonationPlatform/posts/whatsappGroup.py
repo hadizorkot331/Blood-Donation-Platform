@@ -10,10 +10,7 @@ def getinvitelink(grp_id="120363317413351438%40g.us"):
         "authorization": f"Bearer {settings.WHATSAPP_API_KEY}",
     }
 
-    try:
-        response = requests.get(url, headers=headers).json()
-    except:
-        return "#"
+    response = requests.get(url, headers=headers).json()
 
     code = response["invite_code"]
 
