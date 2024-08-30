@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -27,9 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.getenv("DEBUG") == "True" else False
 
-ALLOWED_HOSTS = []
+if os.getenv("ALLOWED_HOSTS"):
+    ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(" ")
+else:
+    ALLOWED_HOSTS = []
+
 HOST = os.getenv("HOST")
 
 # Application definition
@@ -81,12 +86,17 @@ WSGI_APPLICATION = "bloodDonationPlatform.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+
+# if DEBUG:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": BASE_DIR / "db.sqlite3",
+#         }
+#     }
+# else:
+DATABASES = {}
+DATABASES["default"] = dj_database_url.parse(os.getenv("PROD_DB_URL", ""))
 
 
 # Password validation
