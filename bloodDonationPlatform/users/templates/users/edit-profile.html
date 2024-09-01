@@ -1,0 +1,120 @@
+{%load static%}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Edit Profile</title>
+  </head>
+
+
+  {% if form.errors %}
+    {% for field in form %}
+      {% for error in field.errors %}
+      <div role="alert">
+        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          Error
+        </div>
+        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>{{error}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div role="alert">
+      <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+        Error
+      </div>
+      <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+        <p>{{error}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="bg-cover bg-no-repeat bg-fixed h-screen w-screen flex justify-center items-center"
+    style="background-image: url({% static '/images/bg4.jpg' %});">
+    <form action="{% url 'users:edit-profile' %}" class="w-full h-full flex justify-center items-center" method="post">
+      {% csrf_token %}
+      <div
+        class="bg-slate-400/[0.05] w-4/5 md:w-2/5 h-4/5 rounded-2xl backdrop-blur-md brightness-125 shadow-lg flex flex-col justify-evenly items-center">
+        <div class=" w-4/5 h-1/5 flex flex-col justify-center font-mono text-3xl text-slate-200 font-bold">
+          Edit Profile
+        </div>
+        <div class="w-4/5 h-4/5 flex flex-col justify-evenly font-mono ">
+          <div>
+            <label class="block text-slate-200 text-sm font-bold font-mono" for="Email">
+              Email
+            </label>
+            <!-- EMAIL INPUT -->
+            {% with WIDGET_REQUIRED_CLASS='required' %}
+                {% render_field form.email class+="shadow rounded-3xl w-full py-1 px-4 text-black placeholder-black font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" placeholder="Email"%}
+            {% endwith %}
+            {% comment %} <input
+              class="shadow rounded-3xl w-full py-1 px-4 text-black placeholder-black font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20"
+              id="Email" type="text" placeholder="Email"> {% endcomment %}
+          </div>
+
+
+          <div class="flex flex-col gap-0 md:flex-row md:gap-3 ">
+            <div class="flex flex-col w-full md:w-1/2">
+              <label class="block text-slate-200 text-sm font-bold font-mono" for="FirstName">
+                Blood Type
+              </label>
+
+              <div class="relative inline-block">
+                <!-- Dropdown Menu button -->
+                {% render_field form.blood_type class+="text-white bg-rose-200/[0.15] hover:bg-rose-800 outline-none  font-medium rounded-3xl text-sm px-5 py-2.5 text-center inline-flex items-center w-full" type="button"%}
+              </div>
+            </div>
+            
+            <div class="flex flex-col w-full md:w-1/2">
+              <label class="block text-slate-200 text-sm font-bold font-mono" for="FirstName">
+                Caza
+              </label>
+              <div class="relative inline-block">
+                {% render_field form.caza class+="text-white bg-rose-200/[0.15] hover:bg-rose-800 outline-none  font-medium rounded-3xl text-sm px-5 py-2.5 text-center inline-flex items-center w-full" type="button"%}
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full h-2/6 flex flex-col justify-evenly text-center">
+            {% comment %} <a href="{{invite_link}}"
+              class="bg-gradient-to-r w-full from-green-600 to-green-700 font-mono font-thin rounded-3xl py-1 px-12
+                text-slate-200 text-sm lg:text-lg shadow-lg mt-5 transition duration-300 hover:saturate-[1.25] hover:drop-shadow-lg h-1/4 flex justify-center items-center">
+              <button class="">
+                Join Whatsapp Group
+              </button>
+            </a> {% endcomment %}
+            <button
+              class="bg-gradient-to-r w-full from-rose-600 to-amber-700 font-mono font-thin rounded-3xl py-1 px-12
+                text-slate-200 text-lg shadow-lg mt-5 transition duration-300 hover:saturate-[1.25] hover:drop-shadow-lg"
+              type="submit">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  </html>
+</body>
+
+</html>

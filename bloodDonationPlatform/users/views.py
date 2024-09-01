@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from .models import Profile
 
 from .forms import RegistrationForm, ProfileCompletionForm
 
@@ -63,6 +64,21 @@ def complete_profile(request):
         "users/complete-profile.html",
         {"form": form},
     )
+
+
+@login_required(login_url="/users/login")  # type: ignore
+def edit_profile(request):
+    if request.method == "POST":
+        form = ProfileCompletionForm(request.POST, instance=request.user.profile)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your profile has been successfully updated!")
+            return redirect("posts:home")
+    else:
+        form = ProfileCompletionForm(instance=request.user.profile)
+
+    return render(request, "users/edit-profile.html", {"form": form})
 
 
 def login_view(request):
