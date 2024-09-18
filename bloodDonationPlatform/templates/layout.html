@@ -82,17 +82,17 @@
             </a>
             <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 <button type="button"
-                    class="flex text-sm bg-rose-800 rounded-full md:me-0 focus:ring-4 focus:ring-rose-300 dark:focus:ring-rose-600"
+                    class="flex text-sm bg-rose-800 rounded-full md:me-0 focus:ring-4 focus:ring-rose-600"
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
                     <img class="w-8 h-8 rounded-full" src="{% static '/images/user.png' %}" alt="photo">
                 </button>
                 <!-- Dropdown menu -->
-                <div class="z-20 hidden my-4 text-base list-none bg-white divide-y divide-rose-100 rounded-lg shadow dark:bg-rose-700 dark:divide-rose-600"
+                <div class="z-20 hidden my-4 text-base list-none divide-y rounded-lg shadow bg-rose-700 divide-rose-600"
                     id="user-dropdown">
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-rose-900 dark:text-white">
+                        <span class="block text-sm text-white">
                             {% if user.is_authenticated %}
                             {{user.username}}
                             {% else %}
@@ -100,7 +100,7 @@
                             {% endif %}
                         </span>
                         <span
-                            class="block text-sm  text-rose-500 truncate dark:text-rose-400">
+                            class="block text-sm truncate text-rose-400">
                             {% if user.is_authenticated %}
                             {{user.profile.email}}
                             {% else %}
@@ -111,18 +111,18 @@
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a href="{% url 'users:edit-profile' %}"
-                                class="block px-4 py-2 text-sm text-rose-700 hover:bg-rose-100 dark:hover:bg-rose-600 dark:text-rose-200 dark:hover:text-white">My
+                                class="block px-4 py-2 text-sm hover:bg-rose-600 text-rose-200 hover:text-white">My
                                 Info</a>
                         </li>
                         <li>
                             <a href="{% url 'users:logout' %}"
-                                class="block px-4 py-2 text-sm text-rose-700 hover:bg-rose-100 dark:hover:bg-rose-600 dark:text-rose-200 dark:hover:text-white">Sign
+                                class="block px-4 py-2 text-sm hover:bg-rose-600 text-rose-200 hover:text-white">Sign
                                 out</a>
                         </li>
                     </ul>
                 </div>
                 <button data-collapse-toggle="navbar-user" type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-rose-500 rounded-lg md:hidden hover:bg-rose-100 focus:outline-none focus:ring-2 focus:ring-rose-200 dark:text-rose-400 dark:hover:bg-rose-700 dark:focus:ring-rose-600"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 text-rose-400 hover:bg-rose-700 focus:ring-rose-600"
                     aria-controls="navbar-user" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -137,7 +137,7 @@
                     class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 ">
                     <li>
                         <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                            class="flex items-center justify-between w-full py-2 px-3 text-rose-900 rounded hover:bg-rose-100 md:hover:bg-transparent md:border-0 md:hover:text-rose-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-rose-500 dark:focus:text-white dark:border-rose-700 dark:hover:bg-rose-700 md:dark:hover:bg-transparent">Posts
+                            class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto text-white md:hover:text-rose-500 focus:text-white border-rose-700 hover:bg-rose-700 md:hover:bg-transparent">Posts
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -145,16 +145,16 @@
                             </svg></button>
                         <!-- Dropdown menu -->
                         <div id="dropdownNavbar"
-                            class="z-10 hidden font-normal bg-white divide-y divide-rose-500 rounded-lg shadow w-44 dark:bg-rose-700 dark:divide-rose-600">
+                            class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 bg-rose-700 divide-rose-600">
                             <ul class="py-2 text-sm text-red-200" aria-labelledby="dropdownLargeButton">
                                 <li>
                                     <a href="{% url 'posts:home' %}"
-                                        class="block px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-600 dark:hover:text-white">Elligible
+                                        class="block px-4 py-2 hover:bg-rose-600 hover:text-white">Elligible
                                         Posts</a>
                                 </li>
                                 <li>
                                     <a href="{% url 'posts:all-posts' %}"
-                                        class="block px-4 py-2 hover:bg-rose-100 dark:hover:bg-rose-600 dark:hover:text-white">All
+                                        class="block px-4 py-2 hover:bg-rose-600 hover:text-white">All
                                         Posts</a>
                                 </li>
                             </ul>
@@ -162,17 +162,17 @@
                     </li>
                     <li>
                         <a href="{% url 'posts:add-post' %}"
-                            class="block py-2 px-3 text-rose-900 rounded hover:bg-rose-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0 dark:text-white md:dark:hover:text-rose-500 dark:hover:bg-rose-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-rose-700">Add
+                            class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white hover:bg-rose-700 md:hover:text-rose-600 border-rose-700">Add
                             Post</a>
                     </li>
                     <li>
                         <a href="{% url 'posts:my-posts' %}"
-                            class="block py-2 px-3 text-rose-900 rounded hover:bg-rose-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0 dark:text-white md:dark:hover:text-rose-500 dark:hover:bg-rose-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-rose-700">My
+                            class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white hover:bg-rose-700 md:hover:text-rose-600 border-rose-700">My
                             Posts</a>
                     </li>
                     <li>
                         <a href="{% url 'posts:whatsapp-group-link' %}" target="_blank"
-                            class="block py-2 px-3 text-rose-900 rounded hover:bg-green-500 md:hover:bg-transparent md:hover:text-green-500 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-green-500 dark:hover:text-white md:dark:hover:bg-transparent dark:border-green-700">Whatsapp Group</a>
+                            class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white hover:bg-green-500 md:hover:text-green-500 border-rose-700">Whatsapp Group</a>
                     </li>
                 </ul>
                 
