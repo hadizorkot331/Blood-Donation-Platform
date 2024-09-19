@@ -38,6 +38,11 @@
                 <div class="my-4 w-full">
                     <div class="border-t border-white"></div>
                 </div>
+
+                <div class="w-full text-start">
+                    <p class="text-xs text-slate-200/[0.8]">{{post.date_added}}</p>
+                </div>
+
                 {% if post.fullfilled %}
                 <form action="{% url 'posts:my-posts' %}" class="w-full" method="post">
                     {% csrf_token %}
