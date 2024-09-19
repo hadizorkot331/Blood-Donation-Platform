@@ -21,6 +21,7 @@ class Profile(models.Model):
     caza = models.CharField(
         max_length=25, choices=CAZAS_AS_CHOICES, default=("Beirut"), blank=False
     )
+    notifications = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.user.username}, {self.blood_type}, {self.caza}"

@@ -93,14 +93,14 @@
             </div>
           </div>
 
+          <div class="w-full h-1/6 flex flex-col justify-around items-center">
+            <label for="Notifications" class="block text-slate-200 text-sm font-bold font-mono">
+              Notify me when im eligible to donate:
+            </label>
+            {% render_field form.notifications class+="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" %}
+          </div>
+
           <div class="w-full h-2/6 flex flex-col justify-evenly text-center">
-            {% comment %} <a href="{{invite_link}}"
-              class="bg-gradient-to-r w-full from-green-600 to-green-700 font-mono font-thin rounded-3xl py-1 px-12
-                text-slate-200 text-sm lg:text-lg shadow-lg mt-5 transition duration-300 hover:saturate-[1.25] hover:drop-shadow-lg h-1/4 flex justify-center items-center">
-              <button class="">
-                Join Whatsapp Group
-              </button>
-            </a> {% endcomment %}
             <button
               class="bg-gradient-to-r w-full from-rose-600 to-amber-700 font-mono font-thin rounded-3xl py-1 px-12
                 text-slate-200 text-lg shadow-lg mt-5 transition duration-300 hover:saturate-[1.25] hover:drop-shadow-lg"

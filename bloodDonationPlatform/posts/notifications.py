@@ -35,7 +35,8 @@ def notify_compatible_users(
     needed_blood_type, hospital, compatible_blood_types, caza, description, post_id
 ):
     compatible_users = (
-        Profile.objects.filter(blood_type__in=compatible_blood_types)
+        Profile.objects.filter(notifications=True)
+        .filter(blood_type__in=compatible_blood_types)
         .filter(caza=caza)
         .values_list(("email"))
     )

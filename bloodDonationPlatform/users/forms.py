@@ -17,4 +17,4 @@ class RegistrationForm(UserCreationForm):
 class ProfileCompletionForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ("email", "blood_type", "caza")
+        fields = ("email", "blood_type", "caza", "notifications")
