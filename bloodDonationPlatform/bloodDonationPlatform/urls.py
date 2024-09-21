@@ -16,10 +16,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 from users.views import landing_page
 
 urlpatterns = [
-    path("", view=landing_page, name="landing-page"),
+    path("", RedirectView.as_view(url="/posts/", permanent=True)),
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
     path("posts/", include("posts.urls")),
