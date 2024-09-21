@@ -20,7 +20,7 @@ from django.views.generic import RedirectView
 from users.views import landing_page
 
 urlpatterns = [
-    path("", RedirectView.as_view(url="/posts/", permanent=True)),
+    path("", RedirectView.as_view(url="/posts/all-posts/", permanent=True)),
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
     path("posts/", include("posts.urls")),
