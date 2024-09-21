@@ -46,10 +46,15 @@ def complete_profile(request):
             # Add the user to the database and remove the registration information from the session
             user = UserCreationForm(request.session["user_registration_data"]).save()
             login(request, user)
+
             del request.session["user_registration_data"]
 
             profile = form.save(commit=False)
             profile.user = request.user
+
+            # Enable email notifications by default (idk why this doesnt work from the Profile model)
+            profile.notifications = True
+
             profile.save()
             messages.success(
                 request,
