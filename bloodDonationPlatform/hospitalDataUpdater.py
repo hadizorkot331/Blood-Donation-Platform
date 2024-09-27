@@ -5,12 +5,14 @@ of all hospitals in Lebanon.
 This data is read into a pickle file which is used later by the views
 
 We used this approach instead of making the api calls when necessary due to the following reasons:
-    - All our needed information is limited to ~150 hospitals which repeat throughout all posts
-        since they are the only hospitals in Lebanon.
+    - All our needed information is limited to ~130 hospitals which repeat throughout all posts
+        since they are the only hospitals in lebanon.
     - The data accessed is mostly constant and not subject to change. Locations and contact information of hospitals
         almost never change therefore the information is again repeated
     - Making api calls would add ~3 seconds of delay on average on the less than ideal Lebanese internet. In a
         service where urgency is the primary focus, such easily avoidable latency should be avoided
+
+
 """
 
 from django.conf import settings
@@ -40,26 +42,12 @@ HOSPITALS = []
 HOSPITAL_CAZAS = {}
 HOSPITAL_LOCATION_DATA = {}
 
-list_of_tables = []
-
-# Private Hospitals
 for i in range(1, 6):
     url = f"https://www.moph.gov.lb/en/HealthFacilities/index/3/188/8/%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A2%D8%AA-%D8%A7%D9%84%D8%B5%D8%AD%D9%91%D9%8A%D8%A9/page:{i}"
     tables = pd.read_html(url)
-    list_of_tables.append(tables)
-
-# Governmental hospitals
-for i in range(1, 3):
-    url = f"https://www.moph.gov.lb/en/HealthFacilities/index/3/188/1/page:{i}&facility_type=1"
-    tables = pd.read_html(url)
-    list_of_tables.append(tables)
-
-
-for tables in list_of_tables:
-    # tables = pd.read_html(url)
     hospitals = tables[0].to_dict()
 
-    names = map(str.title, hospitals["Name"].values())
+    names = hospitals["Name"].values()
 
     for name in names:
         query = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={name}&key={API_KEY}"
@@ -75,9 +63,7 @@ for tables in list_of_tables:
 
     HOSPITAL_CAZAS.update(dict(zip(names, cazas)))
 
-
 CAZAS = set(HOSPITAL_CAZAS.values())
-HOSPITALS.sort()
 
 data = {
     "HOSPITAL_CAZAS": HOSPITAL_CAZAS,
