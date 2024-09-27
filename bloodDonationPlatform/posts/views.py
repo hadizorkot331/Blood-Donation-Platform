@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
+from django.core.paginator import Paginator
 from .whatsappGroup import getinvitelink
 from .notifications import notify_compatible_users, send_whatsapp_message
 from .models import Post
@@ -24,17 +25,22 @@ from constants import (
 def home(request):
     user_blood_type = request.user.profile.blood_type
     user_caza = request.user.profile.caza
-    posts = (
+    full_posts = (
         Post.objects.filter(fullfilled=False)
         .filter(blood_type__in=DONORS_TO_RECIPIENTS[user_blood_type])
         .filter(hospital__in=CAZA_HOSPITALS[user_caza])
         .order_by("-date_added")
     )
+    p = Paginator(full_posts, 9)
+    page = request.GET.get("page")
+    posts = p.get_page(page)
     return render(request, "posts/post-grid.html", {"posts": posts})
 
 
 def all_posts(request):
-    posts = Post.objects.filter(fullfilled=False).order_by("-date_added")
+    p = Paginator(Post.objects.filter(fullfilled=False).order_by("-date_added"), 9)
+    page = request.GET.get("page")
+    posts = p.get_page(page)
     return render(request, "posts/post-grid.html", {"posts": posts})
 
 
