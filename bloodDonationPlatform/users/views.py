@@ -47,7 +47,10 @@ def complete_profile(request):
             user = UserCreationForm(request.session["user_registration_data"]).save()
             login(request, user)
 
-            del request.session["user_registration_data"]
+            try:
+                del request.session["user_registration_data"]
+            except KeyError:
+                pass
 
             profile = form.save(commit=False)
             profile.user = request.user
