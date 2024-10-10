@@ -44,7 +44,7 @@ def all_posts(request):
     return render(request, "posts/post-grid.html", {"posts": posts})
 
 
-@login_required(login_url="/users/login/")
+# @login_required(login_url="/users/login/")
 def detailed_post(request, post_id):
     post = Post.objects.get(pk=post_id)
     location_data = HOSPITAL_LOCATION_DATA[post.hospital]
