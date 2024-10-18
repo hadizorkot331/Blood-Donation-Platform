@@ -92,7 +92,7 @@
                 <div class="z-20 hidden my-4 text-base list-none divide-y rounded-lg shadow bg-rose-700 divide-rose-600"
                     id="user-dropdown">
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-white">
+                        <span class="block text-sm text-white notranslate">
                             {% if user.is_authenticated %}
                             {{user.username}}
                             {% else %}
@@ -100,7 +100,7 @@
                             {% endif %}
                         </span>
                         <span
-                            class="block text-sm truncate text-rose-400">
+                            class="block text-sm truncate text-rose-400 notranslate">
                             {% if user.is_authenticated %}
                             {{user.profile.email}}
                             {% else %}
