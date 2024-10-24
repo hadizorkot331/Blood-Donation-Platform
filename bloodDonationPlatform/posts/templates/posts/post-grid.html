@@ -37,6 +37,13 @@
             </ul>
         </div>
     </div>
+        <p class="mt-10 text-slate-200 font-mono text-base">This website is a platform where you can see blood donation requests or <a href="{% url 'posts:add-post' %}" class="text-rose-600 underline">request blood</a>. When you add a post, we will automatically send a message to our <a href="{% url 'posts:whatsapp-group-link' %}" class="text-green-600 underline" target="_blank">WhatsApp Group</a> and Emails to eligible users who are close to the hospital.
+            {% if not user.is_authenticated %}
+             <a href="{% url 'users:login' %}" class="text-rose-600 underline">Create an account</a> and help spread the word. 
+             {%endif%}
+        
+        </p>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center mt-10">
         {% for post in posts %}
