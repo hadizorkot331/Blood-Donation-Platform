@@ -17,7 +17,7 @@ def send_whatsapp_message(
 ):
     url = "https://gate.whapi.cloud/messages/text"
     invite_link = getinvitelink()
-    message = f"URGENT BLOOD DONATION NEEDED\n\n\nThe patient's blood type is {needed_blood_type} and is compatible with {', '.join(compatible_blood_types)}.\n\nThe blood is needed at {hospital}.\n\nThe description of this post is: {description}.\n\n\nPlease follow this link to view this post on the website: {settings.HOST + reverse('posts:detailed-post', kwargs={'post_id':post_id})}\n\n\n   --------------------   {invite_link}"
+    message = f"URGENT BLOOD DONATION NEEDED\n\n\nThe patient's blood type is {needed_blood_type} and is compatible with {', '.join(compatible_blood_types)}.\n\nThe blood is needed at {hospital}.\n\nThe description of this post is: {description}.\n\n\nPlease follow this link to view this post on the website: {settings.HOST + reverse('posts:detailed-post', kwargs={'post_id':post_id})}\n\n\n   ----------------------------------------\n   {invite_link}"
 
     payload = {"to": grp_id, "body": message, "typing_time": 0}
     headers = {
