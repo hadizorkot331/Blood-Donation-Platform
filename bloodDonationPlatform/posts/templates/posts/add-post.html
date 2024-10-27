@@ -58,14 +58,14 @@
         <label class="block text-slate-200 text-sm font-bold font-mono" for="Phone">
             Phone Number
         </label>
-            {% render_field form.phone_number class="shadow rounded-3xl w-full py-1 px-4 text-black placeholder-black font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" type="tel"%}
+            {% render_field form.phone_number class="shadow rounded-3xl w-full py-1 px-4 text-black placeholder-gray-600 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" type="tel" id="phone"%}
       </div>
         
         </div>
         <label class="block text-slate-200 text-sm font-bold font-mono" for="Description">
             Description
         </label>
-            {% render_field form.description class+="shadow rounded-3xl w-full py-1 px-4 text-black placeholder-black font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" rows="5"  type="text"%}
+            {% render_field form.description class+="shadow rounded-3xl w-full py-1 px-4 text-black placeholder-gray-600 font-mono font-thin text-lg focus:outline-none  focus:shadow-outline focus:shadow-red-500 focus:shadow-lg transition duration-200 opacity-20" rows="5"  type="text" placeholder="Add a description..."%}
         </div>
         <button
         type="submit" onclick="showSpinner()"
@@ -102,5 +102,17 @@
       buttonText.innerHTML = "Adding Post...";
     }
   }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.6.0/build/js/intlTelInput.min.js"></script>
+<script>
+  const input = document.querySelector("#phone");
+  const iti = intlTelInput(input, {
+    loadUtilsOnInit: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.6.0/build/js/utils.js",
+    initialCountry: "lb",
+  });
+
+  input.addEventListener("change", () => {
+    input.value = iti.getNumber(intlTelInput.utils.numberFormat.E164);
+  });
 </script>
 {% endblock content %}
